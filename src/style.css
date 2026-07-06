@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #FBF6F1;
+  font-family: 'Segoe UI', 'Noto Sans Thai', system-ui, sans-serif;
+  color: #161414;
+}
