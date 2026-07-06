@@ -18,8 +18,17 @@ import type { HistoryEntry } from './types'
 // ---- Tab: ประเภทลูกค้า ----
 const clientType = ref<ClientType>('corporate')
 
+function nextInvoiceNo(entries: HistoryEntry[]): string {
+  let max = 0
+  for (const e of entries) {
+    const match = e.invoiceNo.match(/(\d+)$/)
+    if (match) max = Math.max(max, parseInt(match[1], 10))
+  }
+  return 'INV' + String(max + 1).padStart(6, '0')
+}
+
 // ---- ข้อมูลใบแจ้งหนี้ ----
-const invoiceNo = ref('0024')
+const invoiceNo = ref('INV000001')
 const invoiceDate = ref(new Date().toISOString().slice(0, 10))
 const validUntil = ref('')
 
@@ -91,6 +100,7 @@ const syncStatus = ref<'idle' | 'saving' | 'saved' | 'error'>('idle')
 onMounted(() => {
   history.value = loadHistory()
   sheetWebhookUrl.value = getSheetWebhookUrl()
+  invoiceNo.value = nextInvoiceNo(history.value)
 })
 
 function onWebhookUrlChange() {
