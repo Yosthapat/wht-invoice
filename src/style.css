@@ -1,10 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=Lexend:wght@400;500;600;700&family=Sarabun:wght@400;600;700;800&display=swap');
+
+:root {
+  --pink-1: oklch(93% 0.035 350);
+  --pink-2: oklch(81% 0.11 350);
+  --pink-3: oklch(62% 0.2 350);
+  --pink-4: oklch(47% 0.17 350);
+
+  --ink: oklch(13% 0.015 350);
+  --ink-soft: oklch(43% 0.01 355);
+  --cream: oklch(97% 0.008 50);
+  --surface: oklch(99.5% 0.003 50);
+  --border-muted: oklch(89% 0.03 350);
+
+  --shadow-sm: 3px 3px 0 var(--ink);
+  --shadow-md: 5px 5px 0 var(--ink);
+
+  --font-display: 'Barlow Condensed', 'Sarabun', sans-serif;
+  --font-body: 'Lexend', 'Sarabun', sans-serif;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background: #FBF6F1;
-  font-family: 'Segoe UI', 'Noto Sans Thai', system-ui, sans-serif;
-  color: #161414;
+  background: var(--cream);
+  font-family: var(--font-body);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
