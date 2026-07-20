@@ -62,7 +62,8 @@ export function exportHistoryToXlsx(entries: HistoryEntry[]): void {
     'ส่วนลด': e.discount,
     '% WHT': e.whtRate,
     'ยอด WHT': e.whtAmount,
-    'TOTAL': e.total
+    'TOTAL': e.total,
+    'Link': e.invoiceLink || ''
   }))
   const worksheet = XLSX.utils.json_to_sheet(rows)
   const workbook = XLSX.utils.book_new()

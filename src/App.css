@@ -648,6 +648,27 @@ textarea:focus {
   background: var(--pink-1);
 }
 
+.inv-link {
+  color: var(--pink-3);
+  font-weight: 700;
+  font-size: 12px;
+  text-decoration: none;
+  padding: 3px 10px;
+  border: 1.5px solid var(--pink-3);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.inv-link:hover {
+  background: var(--pink-3);
+  color: #fff;
+}
+
+.inv-link-none {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
 /* ----------------------------------------------------------- Sync status */
 .hint-text {
   font-size: 12px;

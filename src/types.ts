@@ -34,6 +34,30 @@ export interface HistoryEntry {
   whtRate: number
   whtAmount: number
   total: number
+  invoiceLink?: string
+}
+
+export interface InvoiceSnapshot {
+  invoiceNo: string
+  invoiceDate: string
+  validUntil: string
+  sellerName: string
+  sellerPhone: string
+  sellerEmail: string
+  clientType: ClientType
+  clientName: string
+  clientTaxId: string
+  clientAddress: string
+  clientPhone: string
+  clientEmail: string
+  items: InvoiceItem[]
+  whtRate: number
+  discount: number
+  priceMode: PriceMode
+  bankName: string
+  accountNo: string
+  accountName: string
+  note: string
 }
 
 /** อัตราหัก ณ ที่จ่ายที่พบบ่อยสำหรับบุคคลธรรมดา (แก้ไข/เพิ่มได้เอง) */

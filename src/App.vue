@@ -13,7 +13,8 @@ import {
   syncEntryToGoogleSheet,
   syncAllHistoryToGoogleSheet
 } from './utils/history'
-import type { HistoryEntry } from './types'
+import type { HistoryEntry, InvoiceSnapshot } from './types'
+import { encodeInvoiceUrl, decodeInvoiceUrl } from './utils/invoiceUrl'
 
 // ---- Tab: ประเภทลูกค้า ----
 const clientType = ref<ClientType>('corporate')
@@ -97,10 +98,40 @@ const history = ref<HistoryEntry[]>([])
 const sheetWebhookUrl = ref('')
 const syncStatus = ref<'idle' | 'saving' | 'saved' | 'error'>('idle')
 
+function applySnapshot(snap: InvoiceSnapshot) {
+  invoiceNo.value = snap.invoiceNo
+  invoiceDate.value = snap.invoiceDate
+  validUntil.value = snap.validUntil
+  sellerName.value = snap.sellerName
+  sellerPhone.value = snap.sellerPhone
+  sellerEmail.value = snap.sellerEmail
+  clientType.value = snap.clientType
+  clientName.value = snap.clientName
+  clientTaxId.value = snap.clientTaxId
+  clientAddress.value = snap.clientAddress
+  clientPhone.value = snap.clientPhone
+  clientEmail.value = snap.clientEmail
+  items.value = snap.items
+  whtRate.value = snap.whtRate
+  discount.value = snap.discount
+  priceMode.value = snap.priceMode
+  bankName.value = snap.bankName
+  accountNo.value = snap.accountNo
+  accountName.value = snap.accountName
+  note.value = snap.note
+}
+
 onMounted(() => {
   history.value = loadHistory()
   sheetWebhookUrl.value = getSheetWebhookUrl()
-  invoiceNo.value = nextInvoiceNo(history.value)
+
+  const snap = decodeInvoiceUrl()
+  if (snap) {
+    applySnapshot(snap)
+    window.location.hash = ''
+  } else {
+    invoiceNo.value = nextInvoiceNo(history.value)
+  }
 })
 
 function onWebhookUrlChange() {
@@ -108,6 +139,30 @@ function onWebhookUrlChange() {
 }
 
 async function saveToHistory() {
+  const snapshot: InvoiceSnapshot = {
+    invoiceNo: invoiceNo.value,
+    invoiceDate: invoiceDate.value,
+    validUntil: validUntil.value,
+    sellerName: sellerName.value,
+    sellerPhone: sellerPhone.value,
+    sellerEmail: sellerEmail.value,
+    clientType: clientType.value,
+    clientName: clientName.value,
+    clientTaxId: clientTaxId.value,
+    clientAddress: clientAddress.value,
+    clientPhone: clientPhone.value,
+    clientEmail: clientEmail.value,
+    items: items.value,
+    whtRate: whtRate.value,
+    discount: discount.value,
+    priceMode: priceMode.value,
+    bankName: bankName.value,
+    accountNo: accountNo.value,
+    accountName: accountName.value,
+    note: note.value
+  }
+  const invoiceLink = encodeInvoiceUrl(snapshot)
+
   const entry = addHistoryEntry({
     invoiceNo: invoiceNo.value,
     invoiceDate: invoiceDate.value,
@@ -117,7 +172,8 @@ async function saveToHistory() {
     discount: totals.value.discount,
     whtRate: totals.value.whtRate,
     whtAmount: totals.value.whtAmount,
-    total: totals.value.total
+    total: totals.value.total,
+    invoiceLink
   })
   history.value = loadHistory()
 
@@ -493,6 +549,7 @@ async function syncAllToSheet() {
               <th class="num">Subtotal</th>
               <th class="num">WHT</th>
               <th class="num">TOTAL</th>
+              <th>Link</th>
               <th></th>
             </tr>
           </thead>
@@ -505,6 +562,10 @@ async function syncAllToSheet() {
               <td class="num">{{ formatBaht(h.subtotal) }}</td>
               <td class="num">{{ h.whtRate > 0 ? formatBaht(h.whtAmount) : '-' }}</td>
               <td class="num">{{ formatBaht(h.total) }}</td>
+              <td>
+                <a v-if="h.invoiceLink" :href="h.invoiceLink" target="_blank" class="inv-link">เปิด</a>
+                <span v-else class="inv-link-none">-</span>
+              </td>
               <td><button type="button" class="btn-remove" @click="removeHistoryEntry(h.id)">✕</button></td>
             </tr>
           </tbody>
