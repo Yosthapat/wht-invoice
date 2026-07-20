@@ -59,7 +59,7 @@ function removeItem(id: string) {
 const whtRate = ref<number>(3)
 const useCustomRate = ref(false)
 const discount = ref<number>(0)
-const priceMode = ref<PriceMode>('gross')
+const priceMode = ref<PriceMode>('net')
 
 // ---- ข้อมูลรับเงิน ----
 const bankName = ref('K BANK')
