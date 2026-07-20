@@ -155,7 +155,7 @@ async function syncAllToSheet() {
         <svg style="left:14px; top:94px;" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#161414" stroke-width="2.6" stroke-linecap="round"><path d="M12 2v20M4.5 6l15 12M19.5 6l-15 12" /></svg>
         <svg style="right:120px; bottom:-16px; opacity:.25;" width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v20M4.5 6l15 12M19.5 6l-15 12" /></svg>
       </div>
-      <span class="hero-brand">raw.</span>
+      <span class="hero-brand">ravv.</span>
       <div class="hero-inner">
         <div class="hero-title"><h1>ระบบออกใบแจ้งหนี้</h1></div>
 
