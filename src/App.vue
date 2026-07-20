@@ -33,9 +33,9 @@ const invoiceDate = ref(new Date().toISOString().slice(0, 10))
 const validUntil = ref('')
 
 // ---- ผู้ออกใบแจ้งหนี้ ----
-const sellerName = ref('')
-const sellerPhone = ref('')
-const sellerEmail = ref('')
+const sellerName = ref('RAVV')
+const sellerPhone = ref('+66992831461')
+const sellerEmail = ref('ravvandravv@gmail.com')
 
 // ---- ลูกค้า (bill to) ----
 const clientName = ref('')
@@ -62,9 +62,9 @@ const discount = ref<number>(0)
 const priceMode = ref<PriceMode>('gross')
 
 // ---- ข้อมูลรับเงิน ----
-const bankName = ref('')
-const accountNo = ref('')
-const accountName = ref('')
+const bankName = ref('K BANK')
+const accountNo = ref('226-3-68964-2')
+const accountName = ref('AUTTAPINYA S. AND ORNLIN V.')
 const note = ref('')
 
 // ---- คำนวณ ----
