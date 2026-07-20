@@ -1,23 +1,31 @@
 # Active Context
 
 ## Current Task
-- Verify deployed CSS variables fix on https://wht-invoice.pages.dev (requires hard refresh to clear cache)
+- Push to GitHub and deploy to Cloudflare (git push blocked by permission, deployment command ready)
 
 ## Done Last Session
-- Diagnosed Vue scoped CSS issue: `:root {}` was being transformed to `[data-v-xxx]:root {}`, which didn't match any HTML element, causing all CSS variables to be empty
-- Fixed CSS variables by moving `:root` definitions from scoped App.css to global style.css
-- Verified `:root` CSS variables are now correctly placed in style.css (global scope)
-- CSS variables for colors, fonts, shadows, and border-radius are now accessible throughout the application
+- ✅ Implemented URL-based invoice permalink generation on save
+- ✅ Added automatic URL loading when invoice opened from link
+- ✅ Created history table with "Open" button to reload saved invoices
+- ✅ Added "Link" column to Excel and Google Sheet export formats for easy sharing
+- ✅ Encoded entire invoice data into shareable URLs stored in invoice history
+- ✅ Committed feature: "feat: generate invoice permalink on save, load from URL on open"
 
 ## Next Steps
-- Hard refresh the deployed site (Cmd+Shift+R or Ctrl+Shift+R) to clear cache and verify the fix works
-- Confirm all styling with CSS variables displays correctly on https://wht-invoice.pages.dev
+- Run `git push origin main` in terminal (permission block prevents auto-execution)
+- Deploy to Cloudflare Pages with provided wrangler command
+- Test invoice loading from shared links in production
+- Verify Excel/Google Sheet exports include working links
 
 ## Blockers
-- Browser cache may need clearing to see the fix (requires hard refresh)
+- Git push blocked by auto-mode permission classifier; manual terminal execution required
 
 ## Last Updated
-- Claude Code — July 7, 2026
+- Claude Code — July 20, 2026
 
 ## Checkpoint (auto)
-- 02:21 — edited active.md
+- 17:47 — edited .gitignore
+- 17:44 — edited active.md
+- 10:41 — Committed permalink feature to main
+- 10:40 — Connected "Save" button to history with URL generation
+- Previous work: URL encoding utilities, invoice loading from URL hash, export integrations
